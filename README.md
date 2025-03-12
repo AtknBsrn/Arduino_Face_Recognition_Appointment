@@ -67,7 +67,6 @@ Important Notes
 ⚠ Use add_face_to_db.py first, then add_appointment.py, before running main.py.
 
 Repository Structure
-usame/
 │── arduino_code/            # Arduino servo control scripts
 │   ├── main.ino
 │   ├── servo_control.ino
