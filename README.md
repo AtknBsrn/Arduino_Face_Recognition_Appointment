@@ -6,6 +6,7 @@ It detects a person using a **Logitech Brio 100 camera**, tracks their face usin
 If an appointment is detected, the system provides a **voice reminder**.
 
 Features
+
 ✔ **Face recognition** using OpenCV & face_recognition  
 ✔ **Real-time face tracking** with Arduino & SG90 servo motors  
 ✔ **SQLite3 database** for storing users and their appointments  
