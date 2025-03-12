@@ -66,16 +66,3 @@ Important Notes
 ⚠ Make sure the correct Arduino port is set before running the script.
 ⚠ Use add_face_to_db.py first, then add_appointment.py, before running main.py.
 
-Repository Structure
-│── arduino_code/            # Arduino servo control scripts
-│   ├── main.ino
-│   ├── servo_control.ino
-│── python_code/             # Face recognition & database management
-│   ├── main.py
-│   ├── add_face_to_db.py
-│   ├── add_appointment.py
-│   ├── ses_cikar.py
-│   ├── face_recognition_db.py
-│── requirements.txt         # Python dependencies
-│── README.md                # Project documentation
-
