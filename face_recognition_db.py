@@ -3,12 +3,10 @@ import face_recognition
 import numpy as np
 
 
-# 📌 Veritabanı bağlantısını oluştur
 def connect_db():
     return sqlite3.connect('face_recognition.db')
 
 
-# 📌 Yüz encoding'ini veritabanından al
 def get_face_encoding(name):
     conn = connect_db()
     c = conn.cursor()
@@ -23,7 +21,6 @@ def get_face_encoding(name):
     return None
 
 
-# 📌 Yüz encoding'ini veritabanına ekle
 def add_face_encoding(name, image_path):
     image = face_recognition.load_image_file(image_path)
     encodings = face_recognition.face_encodings(image)
@@ -37,7 +34,7 @@ def add_face_encoding(name, image_path):
     conn = connect_db()
     c = conn.cursor()
 
-    # Kullanıcı zaten var mı kontrol et
+
     c.execute("SELECT * FROM users WHERE name=?", (name,))
     result = c.fetchone()
 
@@ -53,7 +50,6 @@ def add_face_encoding(name, image_path):
     return True
 
 
-# 📌 Kullanıcının randevu saatini veritabanına ekle veya güncelle
 def add_randevu(name, randevu_saati):
     conn = connect_db()
     c = conn.cursor()
@@ -72,7 +68,6 @@ def add_randevu(name, randevu_saati):
     conn.close()
 
 
-# 📌 Kullanıcının randevu saatini al
 def get_randevu(name):
     conn = connect_db()
     c = conn.cursor()

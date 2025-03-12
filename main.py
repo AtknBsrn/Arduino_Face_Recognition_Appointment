@@ -8,28 +8,24 @@ import sqlite3
 from face_recognition_db import get_face_encoding
 from datetime import datetime, timedelta
 
-# 📌 Arduino ile bağlantı başlat
 arduino = serial.Serial('COM3', 9600)
 time.sleep(2)
 
-# 📌 Servo başlangıç açıları
 servo_x = 90
 servo_y = 90
 arduino.write(f'{servo_x},{servo_y}\n'.encode())
 time.sleep(1)
 
-# 📌 Tarama Modu Değişkenleri
 arama_modu = True
 arama_yon_x = 5
 arama_yon_y = 3
 yuz_kayboldu_sayac = 0
 yuz_kaybolma_limiti = 5
 
-# 📌 Servo hareket sınırları
 servo_x_min, servo_x_max = 0, 180
 servo_y_min, servo_y_max = 60, 130  # Y ekseni artık daha geniş hareket edecek
 
-# 📌 Veritabanından yüzleri al
+
 known_face_encodings = []
 known_face_names = []
 
@@ -48,7 +44,6 @@ for user in users:
 
 print(f"📌 {len(known_face_names)} kişi yüklendi: {known_face_names}")
 
-# 📌 Kamera ayarları
 video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 480)
 video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
@@ -64,7 +59,6 @@ while True:
 
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    # 📌 Yüz tespitini her 5 karede bir yaparak hızlandırıyoruz
     if frame_counter % 5 == 0:
         face_locations = face_recognition.face_locations(rgb_frame, model="hog")
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
@@ -122,7 +116,6 @@ while True:
             arduino.write(f'{servo_x},{servo_y}\n'.encode())
             time.sleep(0.05)
 
-            # 📌 Yeşil bir kutu çiz ve ismi yaz
             name = "Bilinmiyor"
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding, tolerance=0.5)
             face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)

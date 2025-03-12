@@ -3,7 +3,6 @@ import face_recognition
 import cv2
 import numpy as np
 
-# Veritabanından yüz encoding'lerini çekme
 def get_all_faces():
     conn = sqlite3.connect('face_recognition.db')
     c = conn.cursor()
@@ -21,10 +20,8 @@ def get_all_faces():
 
     return known_face_encodings, known_face_names
 
-# Kayıtlı yüzleri yükle
 known_face_encodings, known_face_names = get_all_faces()
 
-# Kamerayı başlat
 video_capture = cv2.VideoCapture(0)
 
 while True:
@@ -32,7 +29,6 @@ while True:
     if not ret:
         break
 
-    # Yüzleri tespit et
     face_locations = face_recognition.face_locations(frame)
     face_encodings = face_recognition.face_encodings(frame, face_locations)
 
@@ -44,7 +40,7 @@ while True:
             first_match_index = matches.index(True)
             name = known_face_names[first_match_index]
 
-        # Yüzün etrafına kutu çiz ve ismi yaz
+
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
         cv2.putText(frame, name, (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 

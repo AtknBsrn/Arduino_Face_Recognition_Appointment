@@ -1,12 +1,10 @@
 import cv2
 import os
 
-# Kayıt klasörünü oluştur (eğer yoksa)
 save_dir = "faces"
 if not os.path.exists(save_dir):
-    os.makedirs(save_dir)  # Klasör yoksa oluştur
+    os.makedirs(save_dir)
 
-# Kamerayı başlat
 cap = cv2.VideoCapture(0)
 
 while True:
@@ -16,7 +14,6 @@ while True:
 
     cv2.imshow("Yüz Kaydetmek İçin 's' Tuşuna Bas", frame)
 
-    # 's' tuşuna basıldığında resmi kaydet
     if cv2.waitKey(1) & 0xFF == ord('s'):
         save_path = os.path.join(save_dir, "benim_yuzum.jpg")
         cv2.imwrite(save_path, frame)
