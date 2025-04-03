@@ -39,7 +39,7 @@ def add_face_encoding(name, image_path):
     print(f"[SUCCESS] '{name}' veritabanına başarıyla eklendi!")
 
 name = input("Adınızı girin: ")
-image_path = "faces/benim_yuzum2.jpg"
+image_path = "faces/benim_yuzum.jpg"
 add_face_encoding(name, image_path)
 
 conn.close()

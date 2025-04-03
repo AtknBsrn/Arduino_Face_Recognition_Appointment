@@ -7,18 +7,16 @@ def randevu_ekle():
     name = input("Adınızı girin: ")
     randevu_saati = input("Randevu saatini HH:MM formatında girin: ")
 
-    c.execute("SELECT * FROM users WHERE name=?", (name,))
-    result = c.fetchone()
+    
+    try:
+        saat, dakika = map(int, randevu_saati.split(":"))
+    except ValueError:
+        print("⚠ Hatalı saat formatı! Lütfen HH:MM şeklinde girin.")
+        return
 
-    if result:
-        c.execute("UPDATE users SET randevu_saati=? WHERE name=?", (randevu_saati, name))
-        print(f"{name} için randevu saati güncellendi: {randevu_saati}")
-    else:
-        c.execute("INSERT INTO users (name, randevu_saati) VALUES (?, ?)", (name, randevu_saati))
-        print(f"{name} için yeni randevu kaydedildi: {randevu_saati}")
-
+    c.execute("UPDATE users SET randevu_saati=? WHERE name=?", (randevu_saati, name))
     conn.commit()
     conn.close()
+    print(f"✅ {name} için randevu {randevu_saati} olarak kaydedildi!")
 
-if __name__ == "__main__":
-    randevu_ekle()
+randevu_ekle()
